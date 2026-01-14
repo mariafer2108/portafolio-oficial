@@ -21,6 +21,7 @@
 
     function GraphicPage() {
       const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+      const [selectedImage, setSelectedImage] = useState(null);
 
       useEffect(() => {
         const handleMouseMove = (e) => {
@@ -29,6 +30,20 @@
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
       }, []);
+
+      useEffect(() => {
+        if (selectedImage) {
+          document.body.style.overflow = "hidden";
+          const onKey = (e) => {
+            if (e.key === "Escape") setSelectedImage(null);
+          };
+          window.addEventListener("keydown", onKey);
+          return () => {
+            window.removeEventListener("keydown", onKey);
+            document.body.style.overflow = "";
+          };
+        }
+      }, [selectedImage]);
 
       const projects = [
         {
@@ -119,6 +134,7 @@
                     animation: "fadeIn 0.6s ease-out forwards",
                     animationDelay: index * 0.1 + "s",
                   }}
+                  onClick={() => setSelectedImage(project)}
                 >
                   <div className="absolute inset-0">
                     <img
@@ -171,6 +187,7 @@
                     animation: "fadeIn 0.6s ease-out forwards",
                     animationDelay: (projects.length + index) * 0.1 + "s",
                   }}
+                  onClick={() => setSelectedImage(project)}
                 >
                   <div className="absolute inset-0 p-4 flex items-center justify-center">
                     <img
@@ -219,6 +236,7 @@
                     animation: "fadeIn 0.6s ease-out forwards",
                     animationDelay: (projects.length + uiuxProjects.length + index) * 0.1 + "s",
                   }}
+                  onClick={() => setSelectedImage(item)}
                 >
                   <div className="absolute inset-0 p-4 flex items-center justify-center">
                     <img
@@ -259,6 +277,37 @@
               </a>
             </div>
           </main>
+
+          {selectedImage && (
+            <div
+              className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center px-4"
+              onClick={() => setSelectedImage(null)}
+            >
+              <div className="relative max-w-4xl max-h-[85vh] w-full h-full flex items-center justify-center">
+                <button
+                  className="absolute -top-12 right-0 text-sm text-gray-300 hover:text-white transition"
+                  onClick={() => setSelectedImage(null)}
+                >
+                  Cerrar ✕
+                </button>
+                <img
+                  src={selectedImage.imageBase + ".png"}
+                  alt={selectedImage.title}
+                  className="max-w-full max-h-full object-contain rounded-lg"
+                  data-i="0"
+                  onError={(e) => {
+                    const exts = [".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
+                    const i = Number(e.currentTarget.dataset.i || 0);
+                    if (i < exts.length) {
+                      e.currentTarget.src = selectedImage.imageBase + exts[i];
+                      e.currentTarget.dataset.i = i + 1;
+                    }
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              </div>
+            </div>
+          )}
         </div>
       );
     }
