@@ -9,23 +9,6 @@
     body { background-color: #000; color: #fff; }
     @keyframes fadeIn { from {opacity:0; transform: translateY(16px);} to {opacity:1; transform: translateY(0);} }
     .animate-fadeIn { opacity:0; animation: fadeIn 0.6s ease-out forwards; }
-    
-    /* Custom Modal Sizes to ensure responsiveness without relying on Tailwind JIT */
-    .custom-modal-container { width: 100%; max-width: 94vw; max-height: 57vh; }
-    .custom-modal-img { max-width: 88vw; max-height: 53vh; }
-     
-    @media (min-width: 640px) {
-      .custom-modal-container { max-width: 77vw; max-height: 53vh; }
-      .custom-modal-img { max-width: 72vw; max-height: 48vh; }
-    }
-    @media (min-width: 768px) {
-      .custom-modal-container { max-width: 55vw; max-height: 44vh; }
-      .custom-modal-img { max-width: 46vw; max-height: 40vh; }
-    }
-    @media (min-width: 1024px) {
-      .custom-modal-container { max-width: 48vw; max-height: 40vh; }
-      .custom-modal-img { max-width: 42vw; max-height: 35vh; }
-    }
   </style>
 </head>
 <body>
@@ -35,9 +18,6 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel" data-presets="react">
     function WebPage() {
-      const [nombre, setNombre] = React.useState("");
-      const [email, setEmail] = React.useState("");
-      const [mensaje, setMensaje] = React.useState("");
       const [selectedProject, setSelectedProject] = React.useState(null);
       React.useEffect(() => {
         if (selectedProject) {
@@ -52,15 +32,6 @@
           };
         }
       }, [selectedProject]);
-
-      const enviarMail = (e) => {
-        e.preventDefault();
-        const subject = encodeURIComponent("Contacto desde Proyectos Web");
-        const body = encodeURIComponent(
-          `Nombre: ${nombre}\nEmail: ${email}\n\nMensaje:\n${mensaje}`
-        );
-        window.location.href = `mailto:navarromunoz.mariafer@gmail.com?subject=${subject}&body=${body}`;
-      };
 
       const proyectos = [
         { 
@@ -110,8 +81,6 @@
               </a>
               <div className="text-sm text-white/70">
                 <a href="grafico.html" className="hover:text-purple-400">Diseño Gráfico</a>
-                <span className="mx-2 text-white/30">·</span>
-                <a href="sobre.html" className="hover:text-purple-400">Sobre mí</a>
                 <span className="mx-2 text-white/30">·</span>
                 <a href="contacto.html" className="hover:text-emerald-400">Contacto</a>
               </div>
@@ -212,32 +181,42 @@
                 ← Volver a Inicio
               </a>
             </div>
-
           </main>
           {selectedProject && (
             <div
               className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center px-4"
               onClick={handleOverlayClick}
             >
-              <div className="relative flex items-center justify-center custom-modal-container" onClick={(e) => e.stopPropagation()}>
+              <div className="relative w-full max-w-[85vw] sm:max-w-[70vw] md:max-w-[50vw] lg:max-w-[44vw] max-h-[52vh] sm:max-h-[48vh] md:max-h-[40vh] lg:max-h-[36vh] flex items-center justify-center">
                 <button
                   className="absolute -top-10 right-0 text-sm text-gray-300 hover:text-white"
                   onClick={() => setSelectedProject(null)}
                 >
                   Cerrar ✕
                 </button>
-                <div className="rounded-2xl overflow-hidden bg-white/5 border border-white/10 w-full h-full flex items-center justify-center">
+                <div
+                  className="rounded-2xl overflow-hidden bg-white/5 border border-white/10"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <div className="relative">
+                    <button
+                      className="absolute top-2 right-2 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedProject(null);
+                      }}
+                      title="Cerrar imagen"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
                     <img
                       src={selectedProject.base + ".png"}
                       alt={selectedProject.title}
-                      className="w-auto h-auto object-contain mx-auto bg-black custom-modal-img cursor-pointer"
+                      className="max-w-[80vw] sm:max-w-[65vw] md:max-w-[42vw] lg:max-w-[38vw] max-h-[48vh] sm:max-h-[44vh] md:max-h-[36vh] lg:max-h-[32vh] w-auto h-auto object-contain mx-auto bg-black cursor-pointer"
+                      onClick={() => window.open(selectedProject.url, '_blank')}
                       data-i="0"
-                      onClick={() => {
-                        const features = "menubar=no,toolbar=no,location=no,status=no,scrollbars=yes,resizable=yes";
-                        const win = window.open(selectedProject.url, "_blank", features);
-                        if (win) try { win.opener = null; } catch (e) {}
-                      }}
                       onError={(e) => {
                         const exts = [".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
                         const base = selectedProject.base || "";
@@ -248,7 +227,30 @@
                         }
                       }}
                     />
-                    
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
+                      <p className="text-xs uppercase tracking-widest text-white/70">
+                        {selectedProject.title}
+                      </p>
+                      <p className="text-sm text-white/90 mt-1">
+                        {selectedProject.desc}
+                      </p>
+                      <div className="mt-3 flex gap-3">
+                        <a
+                          href={selectedProject.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm"
+                        >
+                          Ver sitio →
+                        </a>
+                        <button
+                          onClick={() => setSelectedProject(null)}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition text-sm"
+                        >
+                          Cerrar
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

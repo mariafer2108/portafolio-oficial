@@ -18,6 +18,15 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel" data-presets="react">
     function AboutPage() {
+      const certificados = [
+        { name: "Título Profesional", file: "certificados/Certificado  Título.pdf" },
+        { name: "Storytelling en Marketing Digital", file: "certificados/Storytelling en el Marketing Digital.pdf" },
+        { name: "UX UI Figma", file: "certificados/UX UI  FIGMA.pdf" },
+        { name: "WordPress", file: "certificados/WordPress Certificado.pdf" },
+        { name: "Introducción a Python", file: "certificados/certificado introduccion python.pdf" },
+        { name: "Certificado UI/UX", file: "certificados/certificado uiux.pdf" },
+      ];
+
       return (
         <div className="min-h-screen bg-black text-white">
           <nav className="fixed w-full z-40 bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-10">
@@ -84,6 +93,43 @@
                     <div className="h-full bg-gradient-to-r from-purple-500 to-pink-500" style={{ width: "78%" }} />
                   </div>
                 </div>
+              </div>
+            </section>
+
+            <section className="mt-16">
+              <h3 className="text-2xl font-bold mb-6">Certificaciones</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                {certificados.map((cert, index) => (
+                  <div key={index} className="flex flex-col gap-3 group">
+                    <div className="relative aspect-[3/4] rounded-lg bg-white overflow-hidden border border-white/10 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] transition-all duration-300">
+                      <iframe
+                        src={cert.file + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH"}
+                        className="w-full h-full"
+                        style={{ border: 'none' }}
+                        title={cert.name}
+                        loading="lazy"
+                      />
+                      <a 
+                        href={cert.file}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute inset-0 bg-transparent"
+                        style={{ pointerEvents: 'none' }} 
+                        aria-hidden="true"
+                      />
+                      {/* Nota: Para permitir scroll en el iframe, no cubrimos con un div que capture eventos. 
+                          El usuario interactúa directo con el iframe. */}
+                    </div>
+                    <a
+                      href={cert.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-center text-gray-400 group-hover:text-white transition-colors duration-300 leading-tight hover:underline"
+                    >
+                      {cert.name}
+                    </a>
+                  </div>
+                ))}
               </div>
             </section>
 
