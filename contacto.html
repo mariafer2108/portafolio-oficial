@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto · Maria Fernanda</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body { background-color: #000; color: #fff; }
+    @keyframes fadeIn { from {opacity:0; transform: translateY(16px);} to {opacity:1; transform: translateY(0);} }
+    .animate-fadeIn { opacity:0; animation: fadeIn 0.6s ease-out forwards; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel" data-presets="react">
+    function ContactPage() {
+      return (
+        <div className="min-h-screen bg-black text-white">
+          <nav className="fixed w-full z-40 bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-10">
+            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+              <a href="index.html" className="shrink-0" aria-label="Volver a Inicio">
+                <img src="img/logo.png" alt="Logo" className="w-12 h-12 object-contain" />
+              </a>
+              <div className="text-sm text-white/70 space-x-6">
+                <a href="web.html" className="hover:text-cyan-400">Desarrollo Web</a>
+                <a href="grafico.html" className="hover:text-purple-400">Diseño Gráfico</a>
+              </div>
+            </div>
+          </nav>
+
+          <header className="pt-28 pb-10 max-w-7xl mx-auto px-6">
+            <h1 className="text-5xl md:text-6xl font-black animate-fadeIn">Contacto</h1>
+            <p className="mt-4 text-gray-300 max-w-2xl animate-fadeIn" style={{animationDelay: '0.1s'}}>
+              ¿Tienes un proyecto o quieres colaborar? Escríbeme y conversemos.
+            </p>
+          </header>
+
+          <main className="max-w-7xl mx-auto px-6 pb-24">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a
+                href="mailto:navarromunoz.mariafer@gmail.com"
+                className="rounded-2xl p-6 bg-white bg-opacity-5 hover:bg-opacity-10 transition animate-fadeIn"
+              >
+                <p className="text-sm text-gray-400">Email</p>
+                <h4 className="text-xl font-semibold mt-2">navarromunoz.mariafer@gmail.com</h4>
+                <p className="text-white/80 mt-2">Respuesta rápida.</p>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/maria-fernanda-navarro-muñoz-8a9116346/"
+                target="_blank" rel="noopener noreferrer"
+                className="rounded-2xl p-6 bg-white bg-opacity-5 hover:bg-opacity-10 transition animate-fadeIn"
+                style={{animationDelay:'0.05s'}}
+              >
+                <p className="text-sm text-gray-400">LinkedIn</p>
+                <h4 className="text-xl font-semibold mt-2">Maria Fernanda Navarro Muñoz</h4>
+                <p className="text-white/80 mt-2">Conecta y revisa mi perfil.</p>
+              </a>
+              <a
+                href="https://github.com/mariafer2108"
+                target="_blank" rel="noopener noreferrer"
+                className="rounded-2xl p-6 bg-white bg-opacity-5 hover:bg-opacity-10 transition animate-fadeIn"
+                style={{animationDelay:'0.1s'}}
+              >
+                <p className="text-sm text-gray-400">GitHub</p>
+                <h4 className="text-xl font-semibold mt-2">mariafer2108</h4>
+                <p className="text-white/80 mt-2">Repositorios y código.</p>
+              </a>
+            </div>
+
+            <div className="mt-16">
+              <a href="index.html" className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 transition">
+                ← Volver a Inicio
+              </a>
+            </div>
+          </main>
+        </div>
+      );
+    }
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<ContactPage />);
+  </script>
+</body>
+</html>
+

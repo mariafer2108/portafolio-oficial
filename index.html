@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio · Maria Fernanda Navarro</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fadeIn {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-out forwards;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect } = React;
+
+    window.processLogoBlackToTransparent = async function(imgEl) {
+      try {
+        const src = imgEl.currentSrc || imgEl.src;
+        const isJpg = src.endsWith(".jpg") || src.endsWith(".jpeg") || src.endsWith(".JPG") || src.endsWith(".JPEG");
+        const isData = src.startsWith("data:");
+        if (!isJpg || isData) return;
+        const img = new Image();
+        img.crossOrigin = "anonymous";
+        img.src = src;
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = reject;
+        });
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        const size = 256;
+        canvas.width = size;
+        canvas.height = size;
+        ctx.drawImage(img, 0, 0, size, size);
+        const imageData = ctx.getImageData(0, 0, size, size);
+        const d = imageData.data;
+        for (let i = 0; i < d.length; i += 4) {
+          const r = d[i], g = d[i + 1], b = d[i + 2];
+          if (r < 28 && g < 28 && b < 28) {
+            d[i + 3] = 0;
+          }
+        }
+        ctx.putImageData(imageData, 0, 0);
+        const dataUrl = canvas.toDataURL("image/png");
+        imgEl.src = dataUrl;
+      } catch (e) {
+        // silencioso
+      }
+    };
+
+    function Portfolio() {
+      const [activeSection, setActiveSection] = useState("home");
+      const [menuOpen, setMenuOpen] = useState(false);
+      const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+      const [showIntro, setShowIntro] = useState(true);
+
+      useEffect(() => {
+        const handleMouseMove = (e) => {
+          setMousePosition({ x: e.clientX, y: e.clientY });
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+      }, []);
+
+      const handleNavClick = (sectionId) => {
+        setActiveSection(sectionId);
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        setMenuOpen(false);
+      };
+
+      const projects = [
+        {
+          id: 1,
+          title: "Club Adulto Mayor “Esperanza Mía”",
+          category: "Identidad de marca",
+          color: "from-green-600 to-amber-700",
+          description: "Logotipo y estética floral cálida",
+          imageBase: "img/adultomayor"
+        },
+        {
+          id: 2,
+          title: "Ave y Libro · Símbolo Educativo",
+          category: "Isotipo monocromático",
+          color: "from-gray-800 to-gray-600",
+          description: "Exploración conceptual en blanco y negro",
+          imageBase: "img/biblioteca"
+        },
+        {
+          id: 3,
+          title: "Productos Orgánicos",
+          category: "Ilustración de marca",
+          color: "from-green-500 to-emerald-700",
+          description: "Personajes y sello artesanal agrícola",
+          imageBase: "img/organicos"
+        }
+      ];
+
+      const skills = [
+        { name: "Figma y Sketch", level: 95 },
+        { name: "UI/UX Design", level: 92 },
+        { name: "Ilustración", level: 78 },
+      ];
+
+      const sections = [
+        { id: "home", label: "Inicio" },
+        { id: "projects", label: "Proyectos" },
+        { id: "about", label: "Sobre Mí" },
+        { id: "contact", label: "Contacto" },
+      ];
+
+      return (
+        <div className="min-h-screen bg-black text-white overflow-hidden">
+          {showIntro && (
+            <div className="fixed inset-0 z-50 bg-black">
+              <div className="absolute inset-0">
+                <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-purple-500 bg-opacity-20 rounded-full filter blur-3xl" />
+                <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-pink-500 bg-opacity-20 rounded-full filter blur-3xl" />
+              </div>
+              <div className="relative z-10 h-full flex items-center justify-center px-6">
+                <div className="text-center max-w-lg">
+                  <div
+                    className="relative inline-block rounded-full ring-2 ring-white ring-opacity-20"
+                  >
+                    <img
+                      src="img/inicio.png"
+                      alt="Entrar"
+                      className="w-48 h-48 md:w-56 md:h-56 rounded-full object-cover"
+                      data-i="0"
+                      onError={(e) => {
+                        const bases = ["img/inicio.jpg", "img/logo.png", "img/logo.jpg"];
+                        const i = Number(e.currentTarget.dataset.i || 0);
+                        if (i < bases.length) {
+                          e.currentTarget.src = bases[i];
+                          e.currentTarget.dataset.i = i + 1;
+                        } else {
+                          e.currentTarget.style.display = "none";
+                        }
+                      }}
+                    />
+                  </div>
+                  <h1 className="mt-6 text-2xl md:text-3xl font-bold">
+                    Maria Fernanda Navarro Muñoz
+                  </h1>
+                  <div className="mt-6 flex items-center justify-center gap-4">
+                    <button
+                      onClick={() => { window.location.href = "web.html"; }}
+                      className="px-5 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                    >
+                      Desarrollo Web
+                    </button>
+                    <button
+                      onClick={() => { window.location.href = "grafico.html"; }}
+                      className="px-5 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                    >
+                      Diseño Gráfico
+                    </button>
+                    <button
+                      onClick={() => { window.location.href = "contacto.html"; }}
+                      className="px-5 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                    >
+                      Contacto
+                    </button>
+                    <button
+                      onClick={() => { window.location.href = "sobre.html"; }}
+                      className="px-5 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                    >
+                      Sobre Mí
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          <div
+            className="fixed w-8 h-8 rounded-full border-2 border-purple-500 pointer-events-none z-50 mix-blend-difference transition-transform duration-200"
+            style={{
+              left: mousePosition.x - 16 + "px",
+              top: mousePosition.y - 16 + "px",
+              transform: "scale(1)",
+            }}
+          />
+
+          <nav className="fixed w-full z-40 bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-10">
+            <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+              <button onClick={() => handleNavClick("home")} className="shrink-0">
+                <img
+                  src="img/logo.png"
+                  alt="Logo"
+                  className="w-16 h-16 object-contain"
+                  data-i="0"
+                  onError={(e) => {
+                    const base = "img/logo";
+                    const exts = [".jpg", ".svg", ".webp", ".jpeg", ".JPG", ".PNG", ".SVG", ".WEBP", ".JPEG"];
+                    const i = Number(e.currentTarget.dataset.i || 0);
+                    if (i < exts.length) {
+                      e.currentTarget.src = base + exts[i];
+                      e.currentTarget.dataset.i = i + 1;
+                    } else {
+                      e.currentTarget.style.display = "none";
+                    }
+                  }}
+                  onLoad={(e) => window.processLogoBlackToTransparent(e.currentTarget)}
+                />
+              </button>
+
+              <div className="hidden md:flex gap-8">
+                {sections.map((section) => (
+                  <button
+                    key={section.id}
+                    onClick={() => handleNavClick(section.id)}
+                    className={
+                      "text-sm transition-colors relative group " +
+                      (activeSection === section.id
+                        ? "text-purple-400"
+                        : "hover:text-purple-400")
+                    }
+                  >
+                    {section.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-full transition-all duration-300" />
+                  </button>
+                ))}
+              </div>
+
+              <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+                <span className="text-2xl">{menuOpen ? "✕" : "☰"}</span>
+              </button>
+            </div>
+
+            {menuOpen && (
+              <div className="md:hidden bg-black bg-opacity-95 border-t border-white border-opacity-10 px-6 py-4 space-y-2">
+                {sections.map((section) => (
+                  <button
+                    key={section.id}
+                    onClick={() => handleNavClick(section.id)}
+                    className="block w-full text-left py-2 text-sm hover:text-purple-400"
+                  >
+                    {section.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </nav>
+
+          <section
+            id="home"
+            className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+          >
+            <div className="absolute inset-0 z-0">
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 bg-opacity-30 rounded-full filter blur-3xl animate-pulse" />
+              <div
+                className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-pink-500 bg-opacity-30 rounded-full filter blur-3xl animate-pulse"
+                style={{ animationDelay: "1s" }}
+              />
+            </div>
+
+            <div className="relative z-10 w-full px-6 max-w-6xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <button
+                  onClick={() => { setShowIntro(false); window.location.href = "web.html"; }}
+                  className="group relative overflow-hidden rounded-3xl p-8 text-left bg-gradient-to-br from-cyan-600 to-blue-700 shadow-xl"
+                >
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
+                    <div className="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
+                  </div>
+                  <div className="relative">
+                    <span className="inline-block mb-3 text-xs tracking-widest uppercase text-white/70">
+                      Desarrollo Web
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-black">Construyo sitios y apps</h2>
+                    <p className="mt-3 text-white/80">
+                      Landing pages, portafolios, experiencias rápidas y accesibles.
+                    </p>
+                    <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/15 backdrop-blur-sm text-white font-semibold transition-all group-hover:bg-white/25 group-hover:translate-x-1">
+                      Entrar
+                      <span className="transition-transform group-hover:translate-x-1">→</span>
+                    </div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => { setShowIntro(false); window.location.href = "grafico.html"; }}
+                  className="group relative overflow-hidden rounded-3xl p-8 text-left bg-gradient-to-br from-purple-600 to-pink-600 shadow-xl"
+                >
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
+                    <div className="absolute -bottom-24 -right-24 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
+                  </div>
+                  <div className="relative">
+                    <span className="inline-block mb-3 text-xs tracking-widest uppercase text-white/70">
+                      Diseño Gráfico
+                    </span>
+                    <h2 className="text-4xl md:text-5xl font-black">Identidad y visual</h2>
+                    <p className="mt-3 text-white/80">
+                      Logotipos, marcas, editorial e ilustración con estilo suave.
+                    </p>
+                    <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/15 backdrop-blur-sm text-white font-semibold transition-all group-hover:bg-white/25 group-hover:translate-x-1">
+                      Ver trabajos
+                      <span className="transition-transform group-hover:translate-x-1">→</span>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section id="web" className="max-w-7xl mx-auto px-6 py-20">
+            <h3 className="text-5xl font-bold mb-6">Desarrollo Web</h3>
+            <p className="text-gray-300 mb-10 max-w-2xl">
+              Experiencias rápidas, accesibles y bien cuidadas. Me enfoco en tipografía, color y rendimiento para crear sitios claros y bonitos.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-2xl p-6 bg-white/5 hover:bg-white/10 transition">
+                <p className="text-sm text-gray-400">Servicio</p>
+                <h4 className="text-xl font-semibold mt-2">Landing Pages</h4>
+                <p className="text-white/80 mt-2">Sitios de una página con impacto visual y conversión.</p>
+              </div>
+              <div className="rounded-2xl p-6 bg-white/5 hover:bg-white/10 transition">
+                <p className="text-sm text-gray-400">Servicio</p>
+                <h4 className="text-xl font-semibold mt-2">Portafolios</h4>
+                <p className="text-white/80 mt-2">Presentaciones limpias y tipografía cuidada.</p>
+              </div>
+              <div className="rounded-2xl p-6 bg-white/5 hover:bg-white/10 transition">
+                <p className="text-sm text-gray-400">Servicio</p>
+                <h4 className="text-xl font-semibold mt-2">Interfaces</h4>
+                <p className="text-white/80 mt-2">UI suave con foco en accesibilidad y performance.</p>
+              </div>
+            </div>
+          </section>
+          <section id="projects" className="max-w-7xl mx-auto px-6 py-20">
+            <h3 className="text-5xl font-bold mb-12">Proyectos Destacados</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {projects.map((project, index) => (
+                <div
+                  key={project.id}
+                  className="group relative rounded-2xl overflow-hidden cursor-pointer bg-white bg-opacity-5"
+                  style={{
+                    paddingBottom: "100%",
+                    animation: "fadeIn 0.6s ease-out forwards",
+                    animationDelay: index * 0.1 + "s",
+                  }}
+                >
+                  <div className="absolute inset-0">
+                    {project.imageBase ? (
+                      <img
+                        src={project.imageBase + ".png"}
+                        alt={project.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        data-i="0"
+                        onError={(e) => {
+                          const exts = [".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
+                          const i = Number(e.currentTarget.dataset.i || 0);
+                          if (i < exts.length) {
+                            e.currentTarget.src = project.imageBase + exts[i];
+                            e.currentTarget.dataset.i = i + 1;
+                          } else {
+                            e.currentTarget.style.display = "none";
+                          }
+                        }}
+                      />
+                    ) : null}
+                    <div
+                      className={
+                        "absolute inset-0 " +
+                        "bg-gradient-to-br from-black to-black opacity-40 group-hover:opacity-60 transition-opacity duration-300"
+                      }
+                    />
+                    <div className="relative z-10 h-full flex flex-col justify-between p-6">
+                      <div className="flex items-start">
+                        <div>
+                          <p className="text-xs uppercase tracking-widest text-white text-opacity-60">
+                            {project.category}
+                          </p>
+                          <h4 className="text-2xl font-semibold mt-2">
+                            {project.title}
+                          </h4>
+                        </div>
+                      </div>
+                      <div className="mt-6">
+                        <p className="text-sm text-white text-opacity-85">
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section
+            id="about"
+            className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center"
+          >
+            <div>
+              <h3 className="text-4xl md:text-5xl font-bold mb-6">Sobre Mí</h3>
+              <p className="text-gray-300 mb-4">
+                Soy Maria Fernanda Navarro Muñoz, madre de una pequeña de 7 años y
+                diseñadora de arte especializada en diseño gráfico, diseño UI y
+                desarrollo front end. Me encanta crear interfaces limpias con buena
+                tipografía y paletas de colores suaves.
+              </p>
+              <p className="text-gray-400">
+                Soy amante del anime, el kpop y la cultura asiática, influencias que
+                llevo a mi trabajo visual. Busco siempre equilibrar estética,
+                accesibilidad y performance para que cada proyecto se sienta bonito,
+                claro y fácil de usar.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {skills.map((skill) => (
+                <div key={skill.name}>
+                  <div className="flex justify-between mb-1 text-sm">
+                    <span>{skill.name}</span>
+                    <span className="text-gray-400">{skill.level}%</span>
+                  </div>
+                  <div className="h-1.5 bg-white bg-opacity-10 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
+                      style={{ width: skill.level + "%" }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section id="contact" className="max-w-7xl mx-auto px-6 py-20">
+            <h3 className="text-4xl md:text-5xl font-bold mb-8">Contacto</h3>
+            <p className="text-gray-300 mb-8 max-w-xl">
+              ¿Tienes un proyecto en mente o quieres colaborar? Estoy disponible para
+              proyectos freelance, colaboraciones y nuevas oportunidades creativas.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <a
+                href="mailto:navarromunoz.mariafer@gmail.com"
+                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
+              >
+                <span className="text-xl">✉</span>
+                <div>
+                  <p className="text-sm text-gray-400">Email</p>
+                  <p className="font-semibold">navarromunoz.mariafer@gmail.com</p>
+                </div>
+              </a>
+              <a
+                href="https://www.linkedin.com/in/maria-fernanda-navarro-muñoz-8a9116346/"
+                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
+              >
+                <span className="text-xl">in</span>
+                <div>
+                  <p className="text-sm text-gray-400">LinkedIn</p>
+                  <p className="font-semibold">
+                    Maria Fernanda Navarro Muñoz
+                  </p>
+                </div>
+              </a>
+              <a
+                href="https://github.com/mariafer2108"
+                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
+              >
+                <span className="text-xl">GH</span>
+                <div>
+                  <p className="text-sm text-gray-400">GitHub</p>
+                  <p className="font-semibold">mariafer2108</p>
+                </div>
+              </a>
+            </div>
+          </section>
+        </div>
+      );
+    }
+
+    const rootElement = document.getElementById("root");
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<Portfolio />);
+  </script>
+</body>
+</html>
