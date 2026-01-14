@@ -17,8 +17,20 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel" data-presets="react">
+    const { useState, useEffect } = React;
+
     function WebPage() {
+      const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
       const [selectedProject, setSelectedProject] = React.useState(null);
+
+      useEffect(() => {
+        const handleMouseMove = (e) => {
+          setMousePosition({ x: e.clientX, y: e.clientY });
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+      }, []);
+
       React.useEffect(() => {
         if (selectedProject) {
           document.body.style.overflow = "hidden";
@@ -74,6 +86,14 @@
 
       return (
         <div className="min-h-screen bg-black text-white">
+          <div
+            className="fixed w-8 h-8 rounded-full border-2 border-purple-500 pointer-events-none z-50 mix-blend-difference transition-transform duration-200"
+            style={{
+              left: mousePosition.x - 16 + "px",
+              top: mousePosition.y - 16 + "px",
+              transform: "scale(1)",
+            }}
+          />
           <nav className="fixed w-full z-40 bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-10">
             <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
               <a href="index.html" className="shrink-0" aria-label="Volver a Inicio">

@@ -1,0 +1,9 @@
+{
+  "name": "portafolio-oficial",
+  "version": "1.0.0",
+  "description": "Portafolio profesional de Maria Fernanda Navarro",
+  "scripts": {
+    "dev": "echo 'Serving static files'",
+    "build": "echo 'No build needed for static site'"
+  }
+}
