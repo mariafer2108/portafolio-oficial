@@ -192,31 +192,31 @@
                       }}
                     />
                   </div>
-                  <h1 className="mt-6 text-2xl md:text-3xl font-bold">
+                  <h1 className="mt-6 text-xl sm:text-2xl md:text-3xl font-bold">
                     Maria Fernanda Navarro Muñoz
                   </h1>
-                  <div className="mt-6 flex items-center justify-center gap-4">
+                  <div className="mt-6 flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 sm:gap-4">
                     <button
                       onClick={() => { window.location.href = "web.html"; }}
-                      className="px-5 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                      className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
                     >
                       Desarrollo Web
                     </button>
                     <button
                       onClick={() => { window.location.href = "grafico.html"; }}
-                      className="px-5 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                      className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base rounded-full bg-gradient-to-r from-purple-500 to-pink-500 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
                     >
                       ilustracion y ux/ui
                     </button>
                     <button
                       onClick={() => { window.location.href = "contacto.html"; }}
-                      className="px-5 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                      className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
                     >
                       Contacto
                     </button>
                     <button
                       onClick={() => { window.location.href = "sobre.html"; }}
-                      className="px-5 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
+                      className="w-full sm:w-auto px-4 py-2 sm:px-5 sm:py-3 text-sm sm:text-base rounded-full bg-gradient-to-r from-purple-500 to-pink-500 font-semibold hover:shadow-lg transform hover:-translate-y-px transition"
                     >
                       Sobre Mí
                     </button>
@@ -311,10 +311,10 @@
             </div>
 
             <div className="relative z-10 w-full px-6 max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 <button
                   onClick={() => { setShowIntro(false); window.location.href = "web.html"; }}
-                  className="group relative overflow-hidden rounded-3xl p-8 text-left bg-gradient-to-br from-cyan-600 to-blue-700 shadow-xl"
+                  className="group relative overflow-hidden rounded-3xl p-6 sm:p-8 text-left bg-gradient-to-br from-cyan-600 to-blue-700 shadow-xl"
                 >
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
@@ -324,8 +324,8 @@
                     <span className="inline-block mb-3 text-xs tracking-widest uppercase text-white/70">
                       Desarrollo Web
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-black">Construyo sitios y apps</h2>
-                    <p className="mt-3 text-white/80">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black">Construyo sitios y apps</h2>
+                    <p className="mt-3 text-sm sm:text-base text-white/80">
                       Landing pages, portafolios, experiencias rápidas y accesibles.
                     </p>
                     <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/15 backdrop-blur-sm text-white font-semibold transition-all group-hover:bg-white/25 group-hover:translate-x-1">
@@ -347,8 +347,8 @@
                     <span className="inline-block mb-3 text-xs tracking-widest uppercase text-white/70">
                       Diseño Gráfico
                     </span>
-                    <h2 className="text-4xl md:text-5xl font-black">Identidad y visual</h2>
-                    <p className="mt-3 text-white/80">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black">Identidad y visual</h2>
+                    <p className="mt-3 text-sm sm:text-base text-white/80">
                       Logotipos, marcas, editorial e ilustración con estilo suave.
                     </p>
                     <div className="mt-6 inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/15 backdrop-blur-sm text-white font-semibold transition-all group-hover:bg-white/25 group-hover:translate-x-1">
@@ -361,9 +361,9 @@
             </div>
           </section>
 
-          <section id="web" className="max-w-7xl mx-auto px-6 py-20">
-            <h3 className="text-5xl font-bold mb-6">Desarrollo Web</h3>
-            <p className="text-gray-300 mb-10 max-w-2xl">
+          <section id="web" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Desarrollo Web</h3>
+            <p className="text-gray-300 mb-8 sm:mb-10 max-w-2xl text-sm sm:text-base">
               Experiencias rápidas, accesibles y bien cuidadas. Me enfoco en tipografía, color y rendimiento para crear sitios claros y bonitos.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -384,9 +384,9 @@
               </div>
             </div>
           </section>
-          <section id="projects" className="max-w-7xl mx-auto px-6 py-20">
-            <h3 className="text-5xl font-bold mb-12">Proyectos Destacados</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <section id="projects" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12">Proyectos Destacados</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {projects.map((project, index) => (
                 <div
                   key={project.id}
@@ -422,19 +422,19 @@
                         "bg-gradient-to-br from-black to-black opacity-40 group-hover:opacity-60 transition-opacity duration-300"
                       }
                     />
-                    <div className="relative z-10 h-full flex flex-col justify-between p-6">
+                    <div className="relative z-10 h-full flex flex-col justify-between p-4 sm:p-6">
                       <div className="flex items-start">
                         <div>
                           <p className="text-xs uppercase tracking-widest text-white text-opacity-60">
                             {project.category}
                           </p>
-                          <h4 className="text-2xl font-semibold mt-2">
+                          <h4 className="text-lg sm:text-xl md:text-2xl font-semibold mt-2">
                             {project.title}
                           </h4>
                         </div>
                       </div>
-                      <div className="mt-6">
-                        <p className="text-sm text-white text-opacity-85">
+                      <div className="mt-4 sm:mt-6">
+                        <p className="text-xs sm:text-sm text-white text-opacity-85">
                           {project.description}
                         </p>
                       </div>
@@ -447,17 +447,17 @@
 
           <section
             id="about"
-            className="max-w-7xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-12 items-center"
+            className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-12 items-center"
           >
             <div>
-              <h3 className="text-4xl md:text-5xl font-bold mb-6">Sobre Mí</h3>
-              <p className="text-gray-300 mb-4">
+              <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Sobre Mí</h3>
+              <p className="text-gray-300 mb-4 text-sm sm:text-base">
                 Soy Maria Fernanda Navarro Muñoz, madre de una pequeña de 7 años y
                 diseñadora de arte especializada en diseño gráfico, diseño UI y
                 desarrollo front end. Me encanta crear interfaces limpias con buena
                 tipografía y paletas de colores suaves.
               </p>
-              <p className="text-gray-400">
+              <p className="text-gray-400 text-sm sm:text-base">
                 Soy amante del anime, el kpop y la cultura asiática, influencias que
                 llevo a mi trabajo visual. Busco siempre equilibrar estética,
                 accesibilidad y performance para que cada proyecto se sienta bonito,
@@ -482,43 +482,43 @@
             </div>
           </section>
 
-          <section id="contact" className="max-w-7xl mx-auto px-6 py-20">
-            <h3 className="text-4xl md:text-5xl font-bold mb-8">Contacto</h3>
-            <p className="text-gray-300 mb-8 max-w-xl">
+          <section id="contact" className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+            <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 sm:mb-8">Contacto</h3>
+            <p className="text-gray-300 mb-6 sm:mb-8 max-w-xl text-sm sm:text-base">
               ¿Tienes un proyecto en mente o quieres colaborar? Estoy disponible para
               proyectos freelance, colaboraciones y nuevas oportunidades creativas.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               <a
                 href="mailto:navarromunoz.mariafer@gmail.com"
-                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
+                className="flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
               >
-                <span className="text-xl">✉</span>
+                <span className="text-lg sm:text-xl">✉</span>
                 <div>
-                  <p className="text-sm text-gray-400">Email</p>
-                  <p className="font-semibold">navarromunoz.mariafer@gmail.com</p>
+                  <p className="text-xs sm:text-sm text-gray-400">Email</p>
+                  <p className="font-semibold text-sm sm:text-base">navarromunoz.mariafer@gmail.com</p>
                 </div>
               </a>
               <a
                 href="https://www.linkedin.com/in/maria-fernanda-navarro-muñoz-8a9116346/"
-                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
+                className="flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
               >
-                <span className="text-xl">in</span>
+                <span className="text-lg sm:text-xl">in</span>
                 <div>
-                  <p className="text-sm text-gray-400">LinkedIn</p>
-                  <p className="font-semibold">
+                  <p className="text-xs sm:text-sm text-gray-400">LinkedIn</p>
+                  <p className="font-semibold text-sm sm:text-base">
                     Maria Fernanda Navarro Muñoz
                   </p>
                 </div>
               </a>
               <a
                 href="https://github.com/mariafer2108"
-                className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
+                className="flex items-center gap-3 px-4 sm:px-6 py-3 sm:py-4 rounded-2xl bg-white bg-opacity-5 hover:bg-white hover:bg-opacity-10 transition-colors"
               >
-                <span className="text-xl">GH</span>
+                <span className="text-lg sm:text-xl">GH</span>
                 <div>
-                  <p className="text-sm text-gray-400">GitHub</p>
-                  <p className="font-semibold">mariafer2108</p>
+                  <p className="text-xs sm:text-sm text-gray-400">GitHub</p>
+                  <p className="font-semibold text-sm sm:text-base">mariafer2108</p>
                 </div>
               </a>
             </div>
