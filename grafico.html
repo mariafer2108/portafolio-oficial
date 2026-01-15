@@ -154,6 +154,23 @@
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-br from-black to-black opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
+                    <div className="relative z-10 h-full flex flex-col justify-between p-4 sm:p-6">
+                      <div className="flex items-start">
+                        <div>
+                          <p className="text-xs uppercase tracking-widest text-white text-opacity-60">
+                            {project.category}
+                          </p>
+                          <h4 className="text-lg sm:text-xl md:text-2xl font-semibold mt-2">
+                            {project.title}
+                          </h4>
+                        </div>
+                      </div>
+                      <div className="mt-4 sm:mt-6">
+                        <p className="text-xs sm:text-sm text-white text-opacity-85">
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
