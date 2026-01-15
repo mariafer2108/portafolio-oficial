@@ -219,16 +219,14 @@
                 >
                   <div className="relative">
                     <button
-                      className="absolute top-2 right-2 z-10 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition"
+                      className="absolute -top-10 sm:top-2 right-0 sm:right-2 z-10 bg-black/70 sm:bg-black/50 hover:bg-black/90 sm:hover:bg-black/70 text-white rounded-full p-2 sm:p-3 transition text-lg sm:text-base"
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedProject(null);
                       }}
                       title="Cerrar imagen"
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
+                      ✕
                     </button>
                     <img
                       src={selectedProject.base + ".png"}
