@@ -87,13 +87,11 @@
       return (
         <div className="min-h-screen bg-black text-white">
           <div
-            className="fixed w-8 h-8 rounded-full border-2 border-purple-500 pointer-events-none z-50 mix-blend-difference transition-transform duration-200"
+            className="hidden md:block fixed w-8 h-8 rounded-full border-2 border-purple-500 pointer-events-none z-50 mix-blend-difference transition-transform duration-200"
             style={{
               left: mousePosition.x - 16 + "px",
               top: mousePosition.y - 16 + "px",
               transform: "scale(1)",
-              display: typeof window !== "undefined" && window.innerWidth < 768 ? "none" : "block",
-            }}
             }}
           />
           <nav className="fixed w-full z-40 bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg border-b border-white border-opacity-10">
