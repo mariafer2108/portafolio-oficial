@@ -111,6 +111,17 @@
         return () => window.removeEventListener("mousemove", handleMouseMove);
       }, []);
 
+      useEffect(() => {
+        if (showIntro) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "";
+        }
+        return () => {
+          document.body.style.overflow = "";
+        };
+      }, [showIntro]);
+
       const handleNavClick = (sectionId) => {
         setActiveSection(sectionId);
         const element = document.getElementById(sectionId);
@@ -161,7 +172,7 @@
       ];
 
       return (
-        <div className="min-h-screen bg-black text-white overflow-hidden" style={{ overflow: showIntro ? "hidden" : "auto" }}>
+        <div className="min-h-screen bg-black text-white overflow-hidden">
           {showIntro && (
             <div className="fixed inset-0 z-50 bg-black flex items-center justify-center px-4 py-8 overflow-hidden">
               <div className="absolute inset-0 overflow-hidden">
