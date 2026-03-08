@@ -165,7 +165,7 @@
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       data-i="0"
                       onError={(e) => {
-                        const exts = [".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
+                        const exts = [".png", ".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
                         const i = Number(e.currentTarget.dataset.i || 0);
                         if (i < exts.length) {
                           e.currentTarget.src = project.imageBase + exts[i];
@@ -218,7 +218,7 @@
                       className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105 shadow-xl rounded-lg"
                       data-i="0"
                       onError={(e) => {
-                        const exts = [".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
+                        const exts = [".png", ".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
                         const i = Number(e.currentTarget.dataset.i || 0);
                         if (i < exts.length) {
                           e.currentTarget.src = project.imageBase + exts[i];
@@ -267,7 +267,7 @@
                       className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105 shadow-xl rounded-lg"
                       data-i="0"
                       onError={(e) => {
-                        const exts = [".PNG", ".jpg", ".jpeg", ".webp", ".JPG", ".png", ".JPEG", ".WEBP"];
+                        const exts = [".png", ".PNG", ".jpg", ".jpeg", ".webp", ".JPG", ".JPEG", ".WEBP"];
                         const i = Number(e.currentTarget.dataset.i || 0);
                         if (i < exts.length) {
                           e.currentTarget.src = item.imageBase + exts[i];
