@@ -149,8 +149,13 @@
                   }}
                   onClick={() => {
                     if (project.pdfUrl) {
-                      // show PDF in modal (same as certificates on about page)
-                      setSelectedImage(project);
+                      // En mobile, abre directamente; en desktop abre modal
+                      const isMobile = window.innerWidth < 768;
+                      if (isMobile) {
+                        window.open(project.pdfUrl, '_blank');
+                      } else {
+                        setSelectedImage(project);
+                      }
                     } else if (project.driveUrl) {
                       window.open(project.driveUrl, '_blank');
                     } else {
