@@ -130,7 +130,7 @@
                 <div
                   key={card.title}
                   className="group relative rounded-2xl overflow-hidden bg-white bg-opacity-5 animate-fadeIn cursor-pointer"
-                  style={{ paddingBottom: "62%", animationDelay: index * 0.05 + "s" }}
+                  style={{ paddingBottom: "100%", animationDelay: index * 0.05 + "s" }}
                   onClick={() => openProject(card)}
                 >
                   <div className="absolute inset-0">
@@ -140,7 +140,7 @@
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       data-i="0"
                       onError={(e) => {
-                        const exts = [".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
+                        const exts = [".png", ".jpg", ".jpeg", ".JPG", ".JPEG", ".PNG", ".webp", ".WEBP"];
                         let i = Number(e.currentTarget.dataset.i || 0);
                         if (i < exts.length) {
                           e.currentTarget.src = card.base + exts[i];
@@ -228,7 +228,7 @@
                   onClick={() => window.open(selectedProject.url, '_blank')}
                   data-i="0"
                   onError={(e) => {
-                    const exts = [".jpg", ".jpeg", ".webp", ".JPG", ".PNG", ".JPEG", ".WEBP"];
+                    const exts = [".png", ".jpg", ".jpeg", ".JPG", ".JPEG", ".PNG", ".webp", ".WEBP"];
                     const base = selectedProject.base || "";
                     const i = Number(e.currentTarget.dataset.i || 0);
                     if (i < exts.length) {
