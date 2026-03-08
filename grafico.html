@@ -311,18 +311,23 @@
               >
                 ✕
               </button>
-              <div className="relative w-full h-full max-w-4xl flex items-center justify-center mt-8 sm:mt-0">
-                {selectedImage.pdfUrl ? (
-                  // PDF viewer
-                  <iframe
-                    src={selectedImage.pdfUrl + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH"}
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    className="rounded-lg"
-                    onClick={(e) => e.stopPropagation()}
-                  ></iframe>
-                ) : (
+              {selectedImage.pdfUrl ? (
+                // PDF viewer
+                <iframe
+                  src={selectedImage.pdfUrl + "#toolbar=0&navpanes=0&scrollbar=0&view=FitH"}
+                  style={{
+                    width: 'calc(100% - 32px)',
+                    height: 'calc(100vh - 100px)',
+                    maxWidth: '1000px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    marginTop: '40px'
+                  }}
+                  frameBorder="0"
+                  onClick={(e) => e.stopPropagation()}
+                ></iframe>
+              ) : (
+                <div className="flex items-center justify-center w-full h-screen max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
                   <img
                     src={selectedImage.imageBase + ".png"}
                     alt={selectedImage.title}
@@ -338,8 +343,8 @@
                     }}
                     onClick={(e) => e.stopPropagation()}
                   />
-                )}
-              </div>
+                </div>
+              )}
             </div>
           )}
         </div>
