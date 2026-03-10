@@ -93,13 +93,15 @@
         }
       ];
 
-      const illustrations = [1, 2, 3, 4, 5, 6].map((n) => ({
-        id: n,
-        title: "Ilustración " + n,
-        category: "Ilustración",
-        description: "",
-        imageBase: "img/" + n
-      }));
+      const illustrations = [
+        { id: 1, title: "Ilustración 1", category: "Ilustración", description: "", imageBase: "img/1" },
+        { id: 2, title: "Ilustración 2", category: "Ilustración", description: "", imageBase: "img/2" },
+        { id: 3, title: "Ilustración 3", category: "Ilustración", description: "", imageBase: "img/3" },
+        { id: 4, title: "Ilustración 4", category: "Ilustración", description: "", imageBase: "img/4" },
+        { id: 5, title: "Ilustración 5", category: "Ilustración", description: "", imageBase: "img/5" },
+        { id: 6, title: "Ilustración 6", category: "Ilustración", description: "", imageBase: "img/6" },
+        { id: 7, title: "Proceso", category: "Ilustración", description: "", imageBase: "img/proceso" }
+      ];
 
       return (
         <div className="min-h-screen bg-black text-white">
@@ -252,6 +254,23 @@
               ))}
             </div>
 
+            <h3 className="text-2xl sm:text-3xl font-bold mt-12 sm:mt-16 mb-6 sm:mb-8">Proceso de Creación de un Vtuber</h3>
+            <div className="bg-white/5 rounded-2xl p-6 sm:p-8 border border-white/10">
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-4">Imagen: Proceso</h4>
+                  <img src="img/proceso.png" alt="Proceso" className="w-full max-w-md mx-auto rounded-lg shadow-lg cursor-pointer" onClick={() => setSelectedImage({ title: "Proceso de Creación", imageBase: "img/proceso" })} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-4">Video: Video Referencia</h4>
+                  <video className="w-full max-w-md mx-auto rounded-lg shadow-lg cursor-pointer" onClick={() => setSelectedImage({ title: "Video Referencia", videoUrl: "img/videoreferencia.mp4" })}>
+                    <source src="img/videoreferencia.mp4" type="video/mp4" />
+                    Tu navegador no soporta el elemento de video.
+                  </video>
+                </div>
+              </div>
+            </div>
+
             <h3 className="text-2xl sm:text-3xl font-bold mt-12 sm:mt-16 mb-6 sm:mb-8">Ilustraciones</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {illustrations.map((item, index) => (
@@ -331,6 +350,14 @@
                   frameBorder="0"
                   onClick={(e) => e.stopPropagation()}
                 ></iframe>
+              ) : selectedImage.videoUrl ? (
+                // Video viewer
+                <div className="flex items-center justify-center w-full h-screen max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+                  <video controls className="max-w-full max-h-full rounded-lg" onClick={(e) => e.stopPropagation()}>
+                    <source src={selectedImage.videoUrl} type="video/mp4" />
+                    Tu navegador no soporta el elemento de video.
+                  </video>
+                </div>
               ) : (
                 <div className="flex items-center justify-center w-full h-screen max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
                   <img
