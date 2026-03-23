@@ -47,39 +47,54 @@
       }, [selectedImage]);
 
       const projects = [
-        {
+          {
           id: 1,
+          title: "Revista de Surf",
+          category: "Publicación",
+          color: "from-blue-600 to-teal-700",
+          description: "Revista de diseño gráfico sobre surf",
+          imageBase: "img/surf",
+          pdfUrl: "revista_surf.pdf"
+        },
+          {
+          id: 2,
+          title: "Identidad Visual",
+          category: "Logotipo",
+          color: "from-purple-600 to-pink-700",
+          description: "Diseño de marca personal o corporativa",
+          imageBase: "img/logo 2"
+        },
+           {
+          id:3,
+          title: "Guitarra",
+          category: "Ilustración",
+          color: "from-amber-600 to-orange-700",
+          description: "Diseño e ilustración de instrumento musical",
+          imageBase: "img/guitar"
+        },
+       {
+          id: 4,
           title: "Club Adulto Mayor 'Esperanza Mía'",
           category: "Identidad de marca",
           color: "from-green-600 to-amber-700",
           description: "Logotipo y estética floral cálida",
           imageBase: "img/adultomayor"
         },
-        {
-          id: 2,
+          {
+          id: 5,
           title: "Ave y Libro · Símbolo Educativo",
           category: "Isotipo monocromático",
           color: "from-gray-800 to-gray-600",
           description: "Exploración conceptual en blanco y negro",
           imageBase: "img/biblioteca"
         },
-        {
-          id: 3,
+         {
+          id: 6,
           title: "Productos Orgánicos",
           category: "Ilustración de marca",
           color: "from-green-500 to-emerald-700",
           description: "Personajes y sello artesanal agrícola",
           imageBase: "img/organicos"
-        },
-        {
-          id: 4,
-          title: "Revista de Surf",
-          category: "Publicación",
-          color: "from-blue-600 to-teal-700",
-          description: "Revista de diseño gráfico sobre surf",
-          imageBase: "img/surf",
-          // local PDF added by user
-          pdfUrl: "revista_surf.pdf"
         }
       ];
 
@@ -90,6 +105,13 @@
           category: "Diseño UI/UX",
           description: "Interfaz moderna para luthieres",
           imageBase: "img/luthier"
+        },
+        {
+          id: 2,
+          title: "Guitar Chord App",
+          category: "Diseño UI/UX",
+          description: "Aplicación interactiva para acordes de guitarra",
+          imageBase: "img/GUITARCHARD"
         }
       ];
 
@@ -100,7 +122,6 @@
         { id: 4, title: "Ilustración 4", category: "Ilustración", description: "", imageBase: "img/4" },
         { id: 5, title: "Ilustración 5", category: "Ilustración", description: "", imageBase: "img/5" },
         { id: 6, title: "Ilustración 6", category: "Ilustración", description: "", imageBase: "img/6" },
-        { id: 7, title: "Proceso", category: "Ilustración", description: "", imageBase: "img/proceso" }
       ];
 
       return (
@@ -256,18 +277,15 @@
 
             <h3 className="text-2xl sm:text-3xl font-bold mt-12 sm:mt-16 mb-6 sm:mb-8">Proceso de Creación de un Vtuber</h3>
             <div className="bg-white/5 rounded-2xl p-6 sm:p-8 border border-white/10">
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-4">Imagen: Proceso</h4>
-                  <img src="img/proceso.png" alt="Proceso" className="w-full max-w-md mx-auto rounded-lg shadow-lg cursor-pointer" onClick={() => setSelectedImage({ title: "Proceso de Creación", imageBase: "img/proceso" })} />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-4">Video: Video Referencia</h4>
-                  <video className="w-full max-w-md mx-auto rounded-lg shadow-lg cursor-pointer" onClick={() => setSelectedImage({ title: "Video Referencia", videoUrl: "img/videoreferencia.mp4" })}>
-                    <source src="img/videoreferencia.mp4" type="video/mp4" />
-                    Tu navegador no soporta el elemento de video.
-                  </video>
-                </div>
+              <div className="flex flex-col items-center">
+                <video 
+                  controls 
+                  className="w-full max-w-2xl rounded-lg shadow-lg cursor-pointer" 
+                  onClick={() => setSelectedImage({ title: "Proceso de Creación Vtuber", videoUrl: "img/proceso.mp4" })}
+                >
+                  <source src="img/proceso.mp4" type="video/mp4" />
+                  Tu navegador no soporta el elemento de video.
+                </video>
               </div>
             </div>
 
