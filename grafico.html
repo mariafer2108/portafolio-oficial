@@ -123,15 +123,6 @@
         }
       ];
 
-      const illustrations = [
-        { id: 1, title: "Ilustración 1", category: "Ilustración", description: "", imageBase: "img/1" },
-        { id: 2, title: "Ilustración 2", category: "Ilustración", description: "", imageBase: "img/2" },
-        { id: 3, title: "Ilustración 3", category: "Ilustración", description: "", imageBase: "img/3" },
-        { id: 4, title: "Ilustración 4", category: "Ilustración", description: "", imageBase: "img/4" },
-        { id: 5, title: "Ilustración 5", category: "Ilustración", description: "", imageBase: "img/5" },
-        { id: 6, title: "Ilustración 6", category: "Ilustración", description: "", imageBase: "img/6" },
-      ];
-
       return (
         <div className="min-h-screen bg-black text-white">
           <div
@@ -351,52 +342,6 @@
                   Tu navegador no soporta el elemento de video.
                 </video>
               </div>
-            </div>
-
-            <h3 className="text-2xl sm:text-3xl font-bold mt-12 sm:mt-16 mb-6 sm:mb-8">Ilustraciones</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-              {illustrations.map((item, index) => (
-                <div
-                  key={item.id}
-                  className="group relative rounded-2xl overflow-hidden cursor-pointer bg-neutral-900 border border-white/10"
-                  style={{
-                    paddingBottom: "100%",
-                    animation: "fadeIn 0.6s ease-out forwards",
-                    animationDelay: (projects.length + uiuxProjects.length + index) * 0.1 + "s",
-                  }}
-                  onClick={() => setSelectedImage(item)}
-                >
-                  <div className="absolute inset-0 p-4 flex items-center justify-center">
-                    <img
-                      src={item.imageBase + ".png"}
-                      alt={item.title}
-                      className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105 shadow-xl rounded-lg"
-                      data-i="0"
-                      onError={(e) => {
-                        const exts = [".png", ".PNG", ".jpg", ".jpeg", ".webp", ".JPG", ".JPEG", ".WEBP"];
-                        const i = Number(e.currentTarget.dataset.i || 0);
-                        if (i < exts.length) {
-                          e.currentTarget.src = item.imageBase + exts[i];
-                          e.currentTarget.dataset.i = i + 1;
-                        } else {
-                          e.currentTarget.style.display = "none";
-                        }
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 z-10">
-                      <div>
-                        <p className="text-xs uppercase tracking-widest text-white text-opacity-60 mb-1">
-                          {item.category}
-                        </p>
-                        <h4 className="text-2xl font-semibold mb-2 text-white">
-                          {item.title}
-                        </h4>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
 
             <div className="mt-12 sm:mt-16">
