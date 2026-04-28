@@ -47,26 +47,33 @@
       }, [selectedProject]);
 
       const proyectos = [
-           { 
+        { 
+          title: "MusArt · Sitio", 
+          desc: "Donde el arte se encuentra con la inspiración.", 
+          base: "img/musart", 
+          fallbacks: ["img/logo"],
+          url: "https://musart.vercel.app"
+        },
+        { 
+          title: "Inventario · App", 
+          desc: "Sistema de gestión de inventario.", 
+          base: "img/inventario", 
+          fallbacks: ["img/logo"],
+          url: "https://mi-cama-inventario.vercel.app"
+        },
+        { 
           title: "Mi Cama · UI", 
           desc: "Interfaz enfocada en accesibilidad.", 
           base: "img/micama", 
           fallbacks: ["img/logo"],
           url: "https://webmicama.vercel.app"
         },
-          { 
+        { 
           title: "Gasfitería · Figma", 
           desc: "Diseño hecho con Figma y pasado a código.", 
           base: "img/gasfiteria", 
           fallbacks: ["img/logo"],
           url: "https://diseno-de-gasfiteria.vercel.app"
-        },
-         { 
-          title: "EMAV · Página", 
-          desc: "Estructura clara y tipografía cuidada.", 
-          base: "img/emav", 
-          fallbacks: ["img/logo"],
-          url: "https://emavchile.com"
         },
         { 
           title: "Gatitos · Sitio", 
@@ -74,13 +81,6 @@
           base: "img/gatitos", 
           fallbacks: ["img/logo"],
           url: "https://gatitos-glotones.vercel.app"
-        },
-        { 
-          title: "MusArt · Sitio", 
-          desc: "Donde el arte se encuentra con la inspiración.", 
-          base: "img/musart", 
-          fallbacks: ["img/logo"],
-          url: "https://musart.vercel.app"
         },
       ];
 
