@@ -49,42 +49,48 @@
       const proyectos = [
         { 
           title: "MusArt · Sitio", 
-          desc: "Donde el arte se encuentra con la inspiración.", 
+          category: "Desarrollo Front-end",
+          description: "Donde el arte se encuentra con la inspiración.", 
           base: "img/musart", 
           fallbacks: ["img/logo"],
           url: "https://musart.vercel.app"
         },
         { 
           title: "Mi Cama · Web", 
-          desc: "Tienda online de ropa de cama de alta calidad.", 
+          category: "E-commerce",
+          description: "Tienda online de ropa de cama de alta calidad.", 
           base: "img/micamaweb", 
           fallbacks: ["img/logo"],
           url: "https://micamaweb.vercel.app"
         },
         { 
           title: "Inventario · App", 
-          desc: "Sistema de gestión de inventario.", 
+          category: "Herramienta de Gestión",
+          description: "Sistema de gestión de inventario.", 
           base: "img/inventario", 
           fallbacks: ["img/logo"],
           url: "https://mi-cama-inventario.vercel.app"
         },
         { 
           title: "Mi Cama · UI", 
-          desc: "Interfaz enfocada en accesibilidad.", 
+          category: "Diseño de Interfaz",
+          description: "Interfaz enfocada en accesibilidad.", 
           base: "img/micama", 
           fallbacks: ["img/logo"],
           url: "https://webmicama.vercel.app"
         },
         { 
           title: "Gasfitería · Figma", 
-          desc: "Diseño hecho con Figma y pasado a código.", 
+          category: "Diseño y Código",
+          description: "Diseño hecho con Figma y pasado a código.", 
           base: "img/gasfiteria", 
           fallbacks: ["img/logo"],
           url: "https://diseno-de-gasfiteria.vercel.app"
         },
         { 
           title: "Gatitos · Sitio", 
-          desc: "Diseño tierno y visual suave.", 
+          category: "Landing Page",
+          description: "Diseño tierno y visual suave.", 
           base: "img/gatitos", 
           fallbacks: ["img/logo"],
           url: "https://gatitos-glotones.vercel.app"
@@ -93,7 +99,7 @@
 
       const proyectoAlma = {
         title: "Alma · WordPress",
-        desc: "Sitio implementado y diseñado en WordPress.",
+        description: "Sitio implementado y diseñado en WordPress.",
         base: "img/alma",
         url: "https://www.almasilvestre.cl"
       };
@@ -172,7 +178,24 @@
                         e.currentTarget.style.display = "none";
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60 opacity-90 group-hover:opacity-80 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-black to-black opacity-40 group-hover:opacity-60 transition-opacity duration-300" />
+                    <div className="relative z-10 h-full flex flex-col justify-between p-4 sm:p-6">
+                      <div className="flex items-start">
+                        <div>
+                          <p className="text-xs uppercase tracking-widest text-white text-opacity-60">
+                            {card.category}
+                          </p>
+                          <h4 className="text-lg sm:text-xl md:text-2xl font-semibold mt-2">
+                            {card.title}
+                          </h4>
+                        </div>
+                      </div>
+                      <div className="mt-4 sm:mt-6">
+                        <p className="text-xs sm:text-sm text-white text-opacity-85">
+                          {card.description}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
